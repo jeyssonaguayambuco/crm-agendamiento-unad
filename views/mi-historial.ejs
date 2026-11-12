@@ -37,8 +37,8 @@
             <td><%= c.servicio_nombre %></td>
             <td><span class="estado <%= c.estado %>"><%= c.estado %></span></td>
             <td><%= Number(c.precio).toLocaleString('es-CO') %></td>
-            <td><%= Number(c.pagado).toLocaleString('es-CO') %></td>
-            <td><%= (Number(c.precio) - Number(c.pagado)).toLocaleString('es-CO') %></td>
+                     <td><%= c.estado === 'cancelada' ? '-' : Number(c.pagado).toLocaleString('es-CO') %></td>
+            <td><%= c.estado === 'cancelada' ? '-' : (Number(c.precio) - Number(c.pagado)).toLocaleString('es-CO') %></td>
           </tr>
         <% }); %>
       </tbody>
