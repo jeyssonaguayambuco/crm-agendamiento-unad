@@ -59,3 +59,34 @@ a { color: #1f5fd0; }
 table { width: 100%; border-collapse: collapse; margin-top: 16px; }
 th, td { padding: 9px; border-bottom: 1px solid #e3e7ee; text-align: left; font-size: 0.9rem; }
 th { background: #eef1f6; }
+
+.contenedor.ancho { max-width: 1100px; }
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.encabezado div { font-size: 0.9rem; }
+.encabezado a { margin-left: 14px; }
+
+.en-linea { display: flex; gap: 6px; align-items: center; }
+.en-linea select { width: auto; margin-top: 0; font-size: 0.85rem; padding: 5px; }
+
+button.pequeno { width: auto; margin-top: 0; padding: 6px 10px; font-size: 0.85rem; }
+
+.estado {
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  text-transform: capitalize;
+}
+.estado.agendada { background: #e4ecfb; color: #1f5fd0; }
+.estado.confirmada { background: #e1f4e8; color: #1d7a4c; }
+.estado.atendida { background: #e8e8ed; color: #4a4f5c; }
+.estado.reprogramada { background: #fdf0da; color: #9a6300; }
+.estado.cancelada { background: #fde8e8; color: #a12121; }

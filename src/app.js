@@ -14,6 +14,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 const authRoutes = require('./routes/authRoutes');
 app.use('/', authRoutes);
+const agendaRoutes = require('./routes/agendaRoutes');
+app.use('/', agendaRoutes);
 app.get('/', (req, res) => {
   res.redirect('/login');
 });

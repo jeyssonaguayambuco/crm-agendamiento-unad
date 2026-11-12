@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agenda interna</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <div class="contenedor ancho">
+    <div class="encabezado">
+      <h1>Agenda interna</h1>
+      <div>
+        <span>Usuario: <%= usuario.nombre %></span>
+        <a href="/logout">Cerrar sesión</a>
+      </div>
+    </div>
+
+    <a href="/agenda/nueva"><button type="button">Registrar nueva cita</button></a>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Cliente</th>
+          <th>Teléfono</th>
+          <th>Servicio</th>
+          <th>Valor</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (citas.length === 0) { %>
+          <tr><td colspan="8">No hay citas registradas.</td></tr>
+        <% } %>
+        <% citas.forEach(function(cita) { %>
+          <tr>
+            <td><%= cita.fecha.toLocaleDateString('es-CO') %></td>
+            <td><%= cita.hora_inicio %> - <%= cita.hora_fin %></td>
+            <td><%= cita.cliente_nombre %> <%= cita.cliente_apellido %></td>
+            <td><%= cita.telefono || '-' %></td>
+            <td><%= cita.servicio_nombre %></td>
+            <td><%= Number(cita.precio).toLocaleString('es-CO') %></td>
+            <td><span class="estado <%= cita.estado %>"><%= cita.estado %></span></td>
+            <td>
+              <form action="/agenda/<%= cita.id %>/estado" method="POST" class="en-linea">
+                <select name="estado">
+                  <option value="agendada" <%= cita.estado === 'agendada' ? 'selected' : '' %>>Agendada</option>
+                  <option value="confirmada" <%= cita.estado === 'confirmada' ? 'selected' : '' %>>Confirmada</option>
+                  <option value="atendida" <%= cita.estado === 'atendida' ? 'selected' : '' %>>Atendida</option>
+                  <option value="reprogramada" <%= cita.estado === 'reprogramada' ? 'selected' : '' %>>Reprogramada</option>
+                  <option value="cancelada" <%= cita.estado === 'cancelada' ? 'selected' : '' %>>Cancelada</option>
+                </select>
+                <button type="submit" class="pequeno">Actualizar</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

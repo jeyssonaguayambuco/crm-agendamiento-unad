@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registrar nueva cita</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Registrar nueva cita</h1>
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+    <form action="/agenda/nueva" method="POST">
+      <label for="cliente_id">Cliente</label>
+      <select id="cliente_id" name="cliente_id" required>
+        <option value="">Seleccione un cliente</option>
+        <% clientes.forEach(function(c) { %>
+          <option value="<%= c.id %>"><%= c.nombre %> <%= c.apellido %></option>
+        <% }); %>
+      </select>
+
+      <label for="servicio_id">Servicio</label>
+      <select id="servicio_id" name="servicio_id" required>
+        <option value="">Seleccione un servicio</option>
+        <% servicios.forEach(function(s) { %>
+          <option value="<%= s.id %>"><%= s.nombre %> (<%= s.duracion_minutos %> min)</option>
+        <% }); %>
+      </select>
+
+      <label for="fecha">Fecha</label>
+      <input type="date" id="fecha" name="fecha" required>
+
+      <label for="hora_inicio">Hora de inicio</label>
+      <input type="time" id="hora_inicio" name="hora_inicio" required>
+
+      <label for="observaciones">Observaciones</label>
+      <textarea id="observaciones" name="observaciones" rows="3"></textarea>
+
+      <button type="submit">Guardar cita</button>
+    </form>
+    <p><a href="/agenda">Volver a la agenda</a></p>
+  </div>
+</body>
+</html>
