@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reservar cita</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Reservar cita</h1>
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+
+    <form action="/reservar/disponibilidad" method="POST">
+      <label for="servicio_id">Servicio</label>
+      <select id="servicio_id" name="servicio_id" required>
+        <option value="">Seleccione un servicio</option>
+        <% servicios.forEach(function(s) { %>
+          <option value="<%= s.id %>" <%= datos && datos.servicio_id == s.id ? 'selected' : '' %>>
+            <%= s.nombre %> (<%= s.duracion_minutos %> min)
+          </option>
+        <% }); %>
+      </select>
+
+      <label for="fecha">Fecha</label>
+      <input type="date" id="fecha" name="fecha" value="<%= datos ? datos.fecha : '' %>" required>
+
+      <button type="submit">Consultar disponibilidad</button>
+    </form>
+
+    <% if (disponibles) { %>
+      <h2 class="subtitulo">Horarios disponibles</h2>
+      <% if (disponibles.length === 0) { %>
+        <p class="error">No hay horarios disponibles para esa fecha.</p>
+      <% } else { %>
+        <div class="horarios">
+          <% disponibles.forEach(function(h) { %>
+            <form action="/reservar/confirmar" method="POST">
+              <input type="hidden" name="servicio_id" value="<%= datos.servicio_id %>">
+              <input type="hidden" name="fecha" value="<%= datos.fecha %>">
+              <input type="hidden" name="hora_inicio" value="<%= h %>">
+              <button type="submit" class="horario"><%= h %></button>
+            </form>
+          <% }); %>
+        </div>
+      <% } %>
+    <% } %>
+
+    <p><a href="/mis-citas">Volver a mis citas</a></p>
+  </div>
+</body>
+</html>

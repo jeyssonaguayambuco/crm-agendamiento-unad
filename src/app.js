@@ -16,6 +16,8 @@ const authRoutes = require('./routes/authRoutes');
 app.use('/', authRoutes);
 const agendaRoutes = require('./routes/agendaRoutes');
 app.use('/', agendaRoutes);
+const clienteRoutes = require('./routes/clienteRoutes');
+app.use('/', clienteRoutes);
 app.get('/', (req, res) => {
   res.redirect('/login');
 });

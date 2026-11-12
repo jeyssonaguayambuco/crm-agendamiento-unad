@@ -90,3 +90,19 @@ button.pequeno { width: auto; margin-top: 0; padding: 6px 10px; font-size: 0.85r
 .estado.atendida { background: #e8e8ed; color: #4a4f5c; }
 .estado.reprogramada { background: #fdf0da; color: #9a6300; }
 .estado.cancelada { background: #fde8e8; color: #a12121; }
+
+.subtitulo { font-size: 1.05rem; margin-top: 24px; margin-bottom: 8px; }
+
+.horarios { display: flex; flex-wrap: wrap; gap: 8px; }
+
+button.horario {
+  width: auto;
+  margin-top: 0;
+  padding: 8px 14px;
+  background: #ffffff;
+  color: #1f5fd0;
+  border: 1px solid #1f5fd0;
+  font-size: 0.9rem;
+}
+
+button.horario:hover { background: #1f5fd0; color: #ffffff; }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mis citas</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <div class="contenedor ancho">
+    <div class="encabezado">
+      <h1>Mis citas</h1>
+      <div>
+        <span>Usuario: <%= usuario.nombre %></span>
+        <a href="/logout">Cerrar sesión</a>
+      </div>
+    </div>
+
+    <a href="/reservar"><button type="button">Reservar nueva cita</button></a>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Servicio</th>
+          <th>Valor</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (citas.length === 0) { %>
+          <tr><td colspan="6">Aún no tiene citas registradas.</td></tr>
+        <% } %>
+        <% citas.forEach(function(cita) { %>
+          <tr>
+            <td><%= cita.fecha.toLocaleDateString('es-CO') %></td>
+            <td><%= cita.hora_inicio %> - <%= cita.hora_fin %></td>
+            <td><%= cita.servicio_nombre %></td>
+            <td><%= Number(cita.precio).toLocaleString('es-CO') %></td>
+            <td><span class="estado <%= cita.estado %>"><%= cita.estado %></span></td>
+            <td>
+              <% if (cita.estado === 'agendada' || cita.estado === 'confirmada') { %>
+                <form action="/mis-citas/<%= cita.id %>/cancelar" method="POST" class="en-linea">
+                  <button type="submit" class="pequeno">Cancelar</button>
+                </form>
+              <% } else { %>
+                -
+              <% } %>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
