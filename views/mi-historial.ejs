@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi historial</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <div class="contenedor ancho">
+    <div class="encabezado">
+      <h1>Mi historial de servicios</h1>
+      <div>
+        <a href="/mis-citas">Mis citas</a>
+        <a href="/logout">Cerrar sesión</a>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Servicio</th>
+          <th>Estado</th>
+          <th>Valor</th>
+          <th>Abonado</th>
+          <th>Saldo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (citas.length === 0) { %>
+          <tr><td colspan="6">Aún no tiene servicios registrados.</td></tr>
+        <% } %>
+        <% citas.forEach(function(c) { %>
+          <tr>
+            <td><%= c.fecha.toLocaleDateString('es-CO') %></td>
+            <td><%= c.servicio_nombre %></td>
+            <td><span class="estado <%= c.estado %>"><%= c.estado %></span></td>
+            <td><%= Number(c.precio).toLocaleString('es-CO') %></td>
+            <td><%= Number(c.pagado).toLocaleString('es-CO') %></td>
+            <td><%= (Number(c.precio) - Number(c.pagado)).toLocaleString('es-CO') %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+    <h2 class="subtitulo">Resumen</h2>
+    <table>
+      <tr><th>Total en servicios</th><td><%= totalServicios.toLocaleString('es-CO') %></td></tr>
+      <tr><th>Total abonado</th><td><%= totalPagado.toLocaleString('es-CO') %></td></tr>
+      <tr><th>Saldo pendiente</th><td><strong><%= saldoTotal.toLocaleString('es-CO') %></strong></td></tr>
+    </table>
+  </div>
+</body>
+</html>

@@ -106,3 +106,5 @@ button.horario {
 }
 
 button.horario:hover { background: #1f5fd0; color: #ffffff; }
+
+.enlace-pequeno { font-size: 0.82rem; display: inline-block; margin-top: 4px; }

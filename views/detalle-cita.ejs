@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detalle de la cita</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <div class="contenedor">
+    <div class="encabezado">
+      <h1>Detalle de la cita</h1>
+      <a href="/agenda">Volver</a>
+    </div>
+
+    <table>
+      <tr><th>Cliente</th><td><%= cita.cliente_nombre %> <%= cita.cliente_apellido %></td></tr>
+      <tr><th>Teléfono</th><td><%= cita.telefono || '-' %></td></tr>
+      <tr><th>Servicio</th><td><%= cita.servicio_nombre %></td></tr>
+      <tr><th>Fecha</th><td><%= cita.fecha.toLocaleDateString('es-CO') %></td></tr>
+      <tr><th>Hora</th><td><%= cita.hora_inicio %> - <%= cita.hora_fin %></td></tr>
+      <tr><th>Estado</th><td><span class="estado <%= cita.estado %>"><%= cita.estado %></span></td></tr>
+      <tr><th>Observaciones</th><td><%= cita.observaciones || '-' %></td></tr>
+    </table>
+
+    <h2 class="subtitulo">Resumen financiero</h2>
+    <table>
+      <tr><th>Valor del servicio</th><td><%= Number(cita.precio).toLocaleString('es-CO') %></td></tr>
+      <tr><th>Total abonado</th><td><%= totalPagado.toLocaleString('es-CO') %></td></tr>
+      <tr><th>Saldo pendiente</th><td><strong><%= saldo.toLocaleString('es-CO') %></strong></td></tr>
+    </table>
+
+    <h2 class="subtitulo">Abonos registrados</h2>
+    <table>
+      <thead>
+        <tr><th>Fecha</th><th>Monto</th><th>Medio</th></tr>
+      </thead>
+      <tbody>
+        <% if (pagos.length === 0) { %>
+          <tr><td colspan="3">No hay abonos registrados.</td></tr>
+        <% } %>
+        <% pagos.forEach(function(p) { %>
+          <tr>
+            <td><%= p.fecha_pago.toLocaleDateString('es-CO') %></td>
+            <td><%= Number(p.monto).toLocaleString('es-CO') %></td>
+            <td><%= p.medio %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+    <h2 class="subtitulo">Registrar abono</h2>
+    <form action="/agenda/<%= cita.id %>/pago" method="POST">
+      <label for="monto">Monto</label>
+      <input type="number" id="monto" name="monto" min="1" step="1" required>
+
+      <label for="medio">Medio de pago</label>
+      <select id="medio" name="medio" required>
+        <option value="efectivo">Efectivo</option>
+        <option value="transferencia">Transferencia</option>
+        <option value="tarjeta">Tarjeta</option>
+      </select>
+
+      <button type="submit">Registrar abono</button>
+    </form>
+  </div>
+</body>
+</html>

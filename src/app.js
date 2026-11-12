@@ -18,6 +18,8 @@ const agendaRoutes = require('./routes/agendaRoutes');
 app.use('/', agendaRoutes);
 const clienteRoutes = require('./routes/clienteRoutes');
 app.use('/', clienteRoutes);
+const pagosRoutes = require('./routes/pagosRoutes');
+app.use('/', pagosRoutes);
 app.get('/', (req, res) => {
   res.redirect('/login');
 });
