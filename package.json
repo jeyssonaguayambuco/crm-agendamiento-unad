@@ -1,0 +1,35 @@
+{
+  "name": "crm-agendamiento-unad",
+  "version": "1.0.0",
+  "description": "Prototipo funcional (TRL 5) desarrollado como componente práctico del curso Proyecto de Grado.",
+  "main": "index.js",
+  "scripts": {
+     "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeyssonaguayambuco/crm-agendamiento-unad.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jeyssonaguayambuco/crm-agendamiento-unad/issues"
+  },
+  "homepage": "https://github.com/jeyssonaguayambuco/crm-agendamiento-unad#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^18.0.10",
+    "ejs": "^7.0.2",
+    "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.24.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
