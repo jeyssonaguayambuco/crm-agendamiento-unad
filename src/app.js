@@ -12,9 +12,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..', 'public')));
-
+const authRoutes = require('./routes/authRoutes');
+app.use('/', authRoutes);
 app.get('/', (req, res) => {
-  res.send('Servidor en funcionamiento');
+  res.redirect('/login');
 });
 
 const PORT = process.env.PORT || 3000;
